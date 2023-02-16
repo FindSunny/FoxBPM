@@ -1,0 +1,1066 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE body PUBLIC '-//OASIS//DTD DocBook XML V5.0//EN'  
+               '../dtd/docbook.dtd'> 
+               
+<body id="bpmn_chapter">
+  <h2>BPMN2.0节点元素</h2>
+
+  <div id="bpmn.info">
+    <h3>1.BPMN简介</h3>
+    <p><span role="bold">介绍:</span></p>
+    <p>
+      业务流程建模标记法（BPMN, Business Process Modeling Notation）是对象管理组织（OMG, Object Management Group）维护的关于业务流程建模的行业性标准。
+      它创建在与UML的活动图非常相似的流程图法（flowcharting）基础上，为“业务流程图”（BPD, Business Process Diagram）中的特定业务流程提供一套图形化标记法。类似德国数学家卡尔·A·佩特里发明的Petri网。
+    </p>
+    <p> <span role="bold">目标:</span></p>
+    <p>
+      BPMN的目标是，通过提供一套既符合业务人员直观又能表现复杂流程语义的标记法，同时为技术人员和业务人员从事业务流程管理提供支持。
+      BPMN的首要目的是提供全体业务相关者易于理解的标准标记法。业务相关者包括创造与梳理流程的业务分析师、负责实施流程的技术开发者、以及管理和监督流程的经理人。BPMN旨在充当公共语言，跨越业务流程设计和实施之间常见的鸿沟。
+      当前有多种竞争的业务流程建模语言标准供建模过程和工具选用。广泛采用BPMN将有助于统一基本的业务流程概念的表达（例如：公共或私有的流程、编排），就像一些高级的业务概念一样（例如：例外处理、事务补偿）。
+    </p>
+    <p> <span role="bold">BPMN2.0元素图</span></p>
+    <p>
+      <a target="_blank" href="../images/BPMN2_0_Poster_EN_big.png">查看完整图片</a>
+      <div ><div>
+        <img align="center" width="800"  src="../images/BPMN2_0_Poster_EN.png"/>
+      </div></div>
+    </p>
+
+    <p> <span role="bold">我们使用BPMN元素进行建模，BPMN的元素分为五个类别</span></p>
+    <p>
+      <div ><div>
+        <img align="center" width="800"   src="../images/bpmn.info.1.png"/>
+      </div></div>
+    </p>
+    <p>
+      <ol>
+        <li>
+          <p>
+            <span role="bold">流对象</span>: 流对象是定义业务流程的主要图形元素。它进一步细分为三个类别,分别是事件、活动和网关。
+          </p>
+        </li>
+        <li>
+          <p>
+            <span role="bold">数据</span>: 它分为四个类别:数据对象、数据输入、数据输出和数据存储。
+          </p>
+        </li>
+        <li>
+          <p>
+            <span role="bold">连接对象</span>: 用来把各个流对象或流对象与其他信息连接起来,它分为四种类别:顺序流(Sequence Flows)、消息流(Message Flows)、关联(Associations)和数据关联(Data Associations)。
+          </p>
+        </li>
+        <li>
+          <p>
+            <span role="bold">泳道</span>: 用来区分不同部门或者不同参与者的功能和职责,泳道包含两种类别：池和道。
+          </p>
+        </li>
+        <li>
+          <p>
+            <span role="bold">人工交付物</span>: 它用以给流程附加一些额外的信息,它分为两种类别：组和附注。
+          </p>
+        </li>
+      </ol>    
+    </p>
+    <p>
+      <span role="bold">BPMN元素的三个层次</span>
+    </p>
+    <p>
+      根据流程引擎的实现顺序我们将BPMN元素分为了三个层次，分别是基本元素、核心元素和高级元素，通过基本元素的学习，我们能够开始进行简单的建模；通过核心元素的学习，能够满足我们平常大部分的建模需求；通过学习高级元素，我们能够看到BPMN所能处理的复杂情况。 
+    </p>
+    <p>
+      <span role="bold">基本元素:</span>
+      <div ><div>
+        <img width="800" align="center" src="../images/bpmn.info.2.png"/>
+      </div></div>
+    </p>
+    <p>
+      <span role="bold">核心元素:</span>
+      <div ><div>
+        <img width="800" align="center" src="../images/bpmn.info.3.png"/>
+      </div></div>
+    </p>
+    <p>
+      <span role="bold">高级元素:</span>
+      <div ><div>
+        <img width="800" align="center" src="../images/bpmn.info.4.png"/>
+      </div></div>
+    </p>
+    <p>
+      <span role="bold">BPMN的扩展元素</span>
+    </p>
+    <p>
+      BPMN2.0是一个各个厂商公认的业务建模标准,最终用户可以不受到来自供应商的绑定,遵循这个标准的厂商之间的产品可以平滑的过度。
+      然而,BPMN2.0标准的的一个缺点就是,它始终是许多不同的公司之间的讨论和妥协的结果,对于一名开发人员来说BPMN 2.0 XML标准的定义,
+      有时感觉它的结构或做事方式有点太麻烦了,并且很多工作流产品必须的流转配置信息,在标准里边没有很好的定义出来,所以,我们在BPMN2.0的基础之上遵循官方对BPMN2.0的扩展原则,
+      对标准做了一些自己的扩展,FoxBPM引擎的扩展都以"foxbpm:"开头,包括节点扩展和属性扩展。 BPMN是个开放的标准,它为每个元素都提供了扩展的方式,extensionElements可以包含在任务BPMN官方的元素里。 
+    </p>
+  </div>
+  <div id="bpmn.process">
+    <h3>2.流程定义</h3>
+    <p> 流程定义基于XML语法、文件后缀名为“bpmn”，可基于eclipse插件进行图形化设计。 流程定义主体主要包括两部分，分别是流程模型信息和元素节点的图形信息。
+      流程模型信息包括所有的流程元素节点定义，包括其中元素节点之间的关联关系，节点名称是“bpmn2:process”。
+      元素节点图形信息包括节点大小和坐标，节点名称是“bpmndi:BPMNDiagram”。 流程定义的主要属性包括默认主题、默认操作表单、流程启动人、数据变量、连接器。 </p>
+    <p>
+            在FoxBPM引擎中,一个流程定义实际指的就是一个Process元素,FoxBPM现在并不支持多Process的交互式流程图,
+            设计完流程定义之后需要发布到数据库中才能供引擎使用,FoxBPM支持多流程版本功能,新启动的流程自动走新的版本,老的流程继续跑在老的版本上,相互不会产生影响。
+    </p> 
+    <p>
+      <span role="bold">XML定义</span>:      
+      <programlisting language="xml"></programlisting>
+    </p>
+    
+    
+    <p>
+      <span role="bold">流程基本信息：</span>:  
+    </p>
+    <ol>
+      
+      <li>
+        <p>
+          <span role="bold">流程编号(id)</span>:也叫流程Key 用来标识一个流程,但是一个流程里会有多个版本,所以通过Key找流程,不能定位到唯一的一个。 
+        </p>
+      </li>
+      <li>
+        <p>
+          <span role="bold">流程唯一编号(dbid)</span>:流程唯一编号,由流程Key、版本号、GIUD组合而成的唯一编号。   
+        </p>
+      </li>
+      <li>
+        <p>
+          <span role="bold">流程名称(name)</span>:流程的名称。
+        </p>
+      </li>
+      <li>
+        <p>
+          <span role="bold">分类(category)</span>:用于流程定义的归类。
+        </p>
+      </li>
+    </ol>
+    
+    <p>
+      <span role="bold">Java代码</span>:  
+      <programlisting language="java"></programlisting> 
+    </p>
+    
+    
+    <p id="bpmn.process.subject">
+      <span role="bold">流程任务主题</span>:
+    </p>
+    <p>
+      流程任务主题是用来标识一个流程实例的说明,不同于人工任务(UserTask)的任务主题,流程的任务主题是用来显示在流程实例上的实例主题,一般情况下我们在流程中只需要设置这个流程任务
+      主题就可以了,一但设置了流程任务主题,流程中的所有人工任务(UserTask)的任务主题在没有配置的情况下就会默认从这里取。
+    </p>
+    
+    
+    
+    <p id="bpmn.process.defaultForm">
+      <span role="bold">默认表单</span>:
+    </p>
+    <p>
+      默认表单包括默认操作表单、默认浏览表单。FoxBPM引擎的一条流程记录会有一个流程实例和多个任务组成,当UserTask的操作表单没有配置的时候,会
+      自动去流程实例默认表单去寻找。当我们想查看一个流程实例的数据的时候一般都是以这个默认表单打开。
+    </p>
+    
+    <p id="bpmn.process.startUser">
+      <span role="bold">流程启动人</span>:
+    </p>
+    <p>
+      流程启动人表示可以启动该流程的用户、启动人主要起到过滤的作用，当用户登录系统后只能看到自己可以启动的流程。
+      流程启动人可以配置具体用户、也可以配置角色和部门或者所有人。如果配置的所有人，那么任何人都可以看到并且可以启动。
+      如果配置的是角色或者部门，那么只有属于该角色或者该部门的用户才可以看到和启动。
+    </p>
+    
+    <p id="bpmn.process.variable">
+      <span role="bold">流程数据变量</span>:
+    </p>
+    <p>
+      流程数据变量是指流程运行过程中会用到的变量，比如可以保存业务表单数据、也可以通过变量控制流程分散、通过变量进行加签会签控制。
+      如果任务活动不在同一个会话中，但又要传递变量值，可以选择将变量持久化。
+      FoxBPM支持常用的数据类型包括String、Integer、List等。
+      常用的业务类型为数据库变量、自定义变量等。
+    </p>
+    
+    <p id="bpmn.process.connector">
+      <span role="bold">流程连接器</span>:
+    </p>
+    <p>
+       在流程上配置的连接器，当流程启动或者结束时会触发执行。任何可以在任务活动上配置的连接器都可以配置在流程定义上。
+    </p>
+     
+     
+  </div>
+  <div id="bpmn.flowElement">
+    <h3>3.FoxBPM支持的BPMN元素</h3>
+    <p>
+      目前FoxBPM只提供了对BPMN标准的部分实现、包括事件、活动、网关、线条等。
+    </p>
+    <p>
+      <ol>
+        <li>
+          <p> 
+            <span role="bold">事件元素：</span>
+            <div ><div>
+              <img width="502" align="justify" contentdepth="163" src="../images/event.PNG"/>
+            </div></div>
+          </p>
+        </li>
+        <li> 
+          <p>  
+            <span role="bold">活动元素：</span>
+            <div ><div>
+              <img width="501" align="justify" contentdepth="261" src="../images/task.PNG"/>
+            </div></div>
+          </p>
+        </li>
+        <li>
+          <p> 
+            <span role="bold">网关元素：</span>
+            <div ><div>
+              <img width="498" align="justify" contentdepth="96"  src="../images/gateway.PNG"/>
+            </div></div>
+          </p>
+        </li>
+        <li>
+          <p> 
+            <span role="bold">线条元素：</span>
+            <div ><div>
+              <img width="496" align="justify" contentdepth="94" src="../images/connector.PNG"/>
+            </div></div>
+          </p>
+        </li>
+        <li>
+          <p> 
+            <span role="bold">图形元素：</span>
+            <div ><div>
+              <img width="497" align="justify" contentdepth="165" src="../images/widget.PNG"/>
+            </div></div>
+          </p>
+        </li>
+      </ol> 
+    </p> 
+    <div>
+      <h3>事件</h3> 
+      <p>
+        事件是在流程过程中发生的事情。事件总是以一个圆圈图形出现。在BPMN 2.0中，存在两个主要的事件类别：捕捉(Catching)或抛出(Throwing)事件。
+        <ol>
+          <li>
+            <p>
+              <span role="bold">捕捉(Catching)</span>:  执行过程中的事件到达时，它会等待一个触发发生。是指由不同的触发器内的图标或XML中的类型声明。捕获事件在视觉上区别于图标不填（即它是白色的）由内投掷事件。
+            </p>
+          </li>
+          <li>
+            <p>
+              <span role="bold">抛出(Throwing)</span>:  执行过程中的事件到达时，触发器被触发。是指由不同的触发器内的图标或XML中的类型声明。投掷项目在视觉上区别从一个醒目的事件内的图标，用黑色填充。
+            </p>
+          </li>
+        </ol>
+        对一个事件来说，通常会有产生该事件的原因（起因）和该事件所产生的影响（结果），例如一个消息的到来触发了一个事件并导致流程的启动，这个开始事件的起因是消息，它被称为消息开始事件，流程在结束时发送了一个消息，这个结束事件的结果是发送了消息，它被称为消息结束事件。我们使用不同的标识来区分事件的不同起因和结果。我们也使用事件不同的起因和结果来分类事件，完整的事件类型如下图所示：
+        空开始事件没有指定事件的起因，它只是产生Token，触发流程的执行；空结束事件没有指定事件的结果，它消费掉Token，结束流程的执行。
+      </p>
+      <p><span role="bold">FoxBPM事件支持: </span></p>
+      <p> 在BPMN2.0官方定义的这些事件中FoxBPM引擎现在支持：开始事件、结束事件、时间边界事件、时间捕获事件、终止事件。</p>
+      <p>
+        <span role="bold">BPMN2.0事件元素图:</span>
+        <div ><div>
+          <img width="800" align="center" src="../images/BPMN2_0_Poster_EN_EVENT.png"/>
+        </div></div>
+      </p>
+      <div>
+        <h3>开始事件</h3>
+        <div id="bpmn.event.NoneStartEvent.Description"> 
+          <h3>描述</h3> 
+          <p>
+            开始事件表示一个空的启动事件,表示流程的启动是人工启动的,需要通过调用FoxBPM引擎RunTimeService中的启动方法将流程发起。
+            开始事件会触发执行流程定义里面配置的连接器。
+          </p>
+          <p> 
+            <programlisting language="java"></programlisting>
+          </p>
+          <p>
+            <span>注意: </span> 私有子流程(subprocess) 总是有一个空启动事件(None StartEvent).
+          </p> 
+        </div>
+        
+        <div id="bpmn.event.NoneStartEvent.GraphicalNotation">
+          <h3>图形符号</h3>
+          <p> 
+            一个空启动事件是图形为一个圆,细边框空心圆圈的图标(即没有触发类型)。
+            <div ><div>
+              <img align="center"  src="../images/start_event.PNG"/>
+            </div></div>
+          </p>
+          
+        </div>
+        
+        <div id="bpmn.event.NoneStartEvent.xml">
+          <h3>XML描述</h3>
+          <p>
+            这是一个空启动事件的XML表示,没有任何子元素(其他开始事件类型都有一个元素声明的类型)。
+            <programlisting language="xml"></programlisting>
+          </p>
+        </div>
+      </div>
+      <div>
+        <h3>时间开始事件</h3> 
+        <div id="bpmn.event.TimeStartEvent.Description"> 
+          <h3>描述</h3> 
+          <p>
+            时间开始事件表示一个流程发布之后会定时启动的事件,表示流程的启动是自动启动的,不需要通过手动调用FoxBPM引擎RunTimeService中的启动方法。
+            时间开始事件也会触发执行流程定义里面配置的连接器。
+          </p> 
+        </div>
+        
+        <div id="bpmn.event.TimeStartEvent.GraphicalNotation">
+          <h3>图形符号</h3>
+          <p> 
+            时间开始事件是图形为一个圆,细边框中间有时钟圆圈的图标(即有时间触发类型)。
+            <div ><div>
+              <img align="center"  src="../images/time_start_event.PNG"/>
+            </div></div>
+          </p>
+          
+        </div>
+        
+        <div id="bpmn.event.TimeStartEvent.xml">
+          <h3>XML描述</h3>
+          <p>
+            时间开始事件的节点元素和开始事件的节点元素一样，只是多了一个时间事件的定义。
+            目前FoxBPM流程引擎支持两种触发类型：其一是日期时间点执行，流程发布或者更新之后流程只会自动启动一遍；其二是循环执行，在流程发布或者更新之后引擎会根据配置的时间表达式周期性执行。
+            两种触发类型的时间表达式都在时间定义元素节点里面配置，如下图所示：
+            <programlisting language="xml"></programlisting>
+          </p>
+        </div>
+      </div>
+      <div>
+        <h3>结束事件</h3> 
+        <div id="bpmn.event.NoneEndEvent.Description"> 
+          <h3>描述</h3> 
+          <p>
+            一个空结束事件(NoneEndEvent)表示抛出的结果是不确定的。因此，流程引擎将只会结束当前执行路径(Token)。 
+            在FoxBPM引擎中,流程执行到空结束事件(NoneEndEvent)的时候,当前 令牌(Token)会被结束,如果当前令牌(Token)是根令牌(RootToken)
+            ,则整个流程实例将会被结束,否则只会结束这个分支令牌(ChildToken),流程实例结束的时候会触发实例结束事件(process-end)。
+          </p>  
+          <p>
+            <span> 需要注意的是：</span> 如果结束事件是触发流程实例结束那将触发执行流程定义里面配置的连接器。
+          </p> 
+        </div>
+        
+        <div id="bpmn.event.NoneEndEvent.GraphicalNotation">
+          <h3>图形符号</h3>
+          <p> 
+            一个空结束事件(NoneEndEvent)是粗的空心的圆圈都成的的图标(没有事件定义)。
+            <div ><div>
+              <img align="center"  src="../images/end_event.PNG"/>
+            </div></div>
+          </p>
+          
+        </div>
+        
+        <div id="bpmn.event.NoneEndEvent.xml">
+          <h3>XML描述</h3>
+          <p>
+            空结束事件(NoneEndEvent)的XML表示,没有任何子元素。
+            <programlisting language="xml"></programlisting>
+          </p>
+        </div>
+      </div>
+      <div>
+        <h3>终止事件</h3> 
+        <div id="bpmn.event.EndEvent.Description"> 
+          <h3>描述</h3> 
+          <p>
+            终止结束事件(Terminate End Event)表示流程走到这里的时候,不仅仅会结束当前的分支,而且还会直接结束整个流程实例,
+            不管当前走到结束的是 分支令牌(ChildToken) 还是 根令牌(RootToken) 都会直接结束整个流程实例,并触发流程实例结束事件(process-end) 
+            结束事件属于抛出(Throwing)型事件，这意味着当流程执行到结束事件时结果将被抛出。结果类型的由事件内的事件定义决定。
+            终止事件将会标识流程实例的状态时终止状态，表示非正常结束。
+          </p>
+        </div>
+        
+        <div id="bpmn.event.EndEvent.GraphicalNotation">
+          <h3>图形符号</h3>
+          <p> 
+            终止事件(EndEvent)是粗的实心的圆圈组成的的图标，如下图所示
+            <div ><div>
+              <img align="center"  src="../images/terminate_end.PNG"/>
+            </div></div>
+          </p>
+        </div>
+        
+        <div id="bpmn.event.EndEvent.xml">
+          <h3>XML描述</h3>
+          <p>
+            终止事件(NoneEndEvent)的XML表示,终止事件的元素节点和结束事件的元素节点一样，但是多了一个终止事件定义的子元素节点，如以下代码所示：
+            <programlisting language="xml"></programlisting>
+          </p>
+        </div>
+      </div>
+      <div>
+        <h3>时间捕获事件</h3> 
+        <div id="bpmn.event.TimeCatchEvent.Description"> 
+          <h3>描述</h3> 
+          <p>
+            时间捕获事件属于中间捕获事件，表示中间捕获事件多了一个时间定义，当流程运行到时间捕获事件节点时就会暂停住，然后在指定的时间或者一定的时间规则下恢复过来。
+          </p>
+        </div>
+        
+        <div id="bpmn.event.TimeCatchEvent.GraphicalNotation">
+          <h3>图形符号</h3>
+          <p> 
+            时间捕获事件(Timer_IntermediateCatchEvent)是图形为一个双层圆,细边框中间有时钟圆圈的图标(即有时间触发类型)。
+            <div ><div>
+              <img align="center"  src="../images/timer_catch_event.PNG"/>
+            </div></div>
+          </p>
+        </div>
+        
+        <div id="bpmn.event.TimeCatchEvent.xml">
+          <h3>XML描述</h3>
+          <p>
+            时间捕获事件的XML表示, 时间捕获事件元素节点为intermediateCatchEvent包括其子元素节点时间事件定义timerEventDefinition，时间事件定义和时间开始事件中的时间事件定义一样，如以下代码所示：
+            <programlisting language="xml"></programlisting>
+          </p>
+        </div>
+      </div>
+      <div>
+        <h3>时间边界事件</h3> 
+        <div id="bpmn.event.TimeBoundayEvent.Description"> 
+          <h3>描述</h3> 
+          <p>
+            边界事件都是捕获事件，它会附在一个环节上。 （边界事件不可能触发事件）。这意味着，当节点运行时， 事件会监听对应的触发类型。 当事件被捕获，就会执行事件的后续连线。可以根据需要选择是否终止活动。
+            定时边界事件是指在边界事件上添加一个时间事件定义提供定时执行功能。当流程执行到绑定了边界事件的环节， 会启动一个定时器。 当定时器触发时（比如，一定时间之后）， 并沿着定时边界事件的外出连线继续执行。
+          </p>
+        </div>
+        
+        <div id="bpmn.event.TimeBoundaryEvent.GraphicalNotation">
+          <h3>图形符号</h3>
+          <p> 
+            时间边界事件的图标和时间捕获事件的图标一致，只不过时间边界事件必须附于一个活动节点。
+            <div ><div>
+              <img align="center"  src="../images/time_boundary_event.PNG"/>
+            </div></div>
+          </p>
+        </div>
+        
+        <div id="bpmn.event.TimeBoundaryEvent.xml">
+          <h3>XML描述</h3>
+          <p>
+            时间边界事件的XML表示, 时间边界事件元素节点为boundaryEvent包括其子元素节点时间事件定义timerEventDefinition，时间事件定义和时间开始事件中的时间事件定义一样，如以下代码所示：
+            <programlisting language="xml"></programlisting>
+          </p>
+          <p>
+            <span>注意: </span> “boundaryEvent”元素节点必须有一个属性“attachedToRef” 以标示其所属的活动节点。
+          </p> 
+        </div>
+      </div>
+    </div>
+    <div>
+      <h3>活动</h3>
+      <p>
+        在基本活动里，我们知道活动是流程是执行过程中的工作，分为两类：任务（原子活动）和子流程（块活动）。
+        任务是流程模型中的最小工作单元，不能继续分解，子流程则能继续分解为一些列的子活动。
+        在核心元素里我们将讨论任务和子流程更加具体的类型，这样我们在建模时会有更加具体的语义。
+        所有的活动节点都支持跳过策略、多实例、执行连接器，都可以基于eclipse插件配置。
+      </p> 
+      <div>
+        <h3>人工任务</h3> 
+        <div id="bpmn.UserTask.Description">
+          <h3>描述</h3>
+          <p>
+            人工任务(UserTask)是用于模拟人工工作的，通常需要人工操作完成的，是流程定义中最常用的节点。 
+            人工任务可配置的属性包括任务名称、任务优先级、任务类型、任务主题、任务描述、任务完成后的描述、任务预计持续的时间、任务操作表单、浏览表单、任务跳过策略、任务命令、任务分配、任务连接器。
+          </p>
+          <p>
+            其中任务名称、任务优先级、任务类型、任务主题、任务描述、任务完成后的描述都可以在待办页面展示， 操作表单用于配置该任务对应的业务表单。
+            如果存在任务可以跳过的情况，可以给任务节点配置跳过策略。
+            任务的执行操作可以通过任务命令进行配置，目前流程支持的任务命令包括：通用、启动并提交、提交等。当然引擎支持任务命令扩展，用户可以自定义任务命令。
+            如果用户想在任务执行的时候调用一个外部服务如：短信接口、WEB服务、发送邮件等，可以通过配置任务的连接器来实现。
+            任务分配支持具体用户分配和组的分配，如果分配指定的具体用户，那么只有该用户才能获取到任务，如果是分配的组包括角色部门等，那么所属该组的用户都可以获取到该任务。
+            
+          </p>
+        </div>
+        <div id="bpmn.UserTask.GraphicalNotation">
+          <h3>图形符号</h3>
+          <p> 
+            一个人工任务是图形为一个圆角矩形,有一个小的用户图标在左上角。如下图所示，制作标书和评阅都属于人工任务。
+            <div ><div>
+              <img align="center"   src="../images/user_task.PNG"/>
+            </div></div>
+          </p>
+        </div>
+        <div id="bpmn.UserTask.XMLRepresentation">
+          <h3>XML描述</h3> 
+          <p>
+            XML元素表示如下:
+            <programlisting language="xml"></programlisting>
+          </p> 
+        </div>
+        
+        <div id="bpmn.UserTask.commonConfig">
+          <h3>任务基本属性</h3>
+          <p>
+            <span role="bold">名称</span>:
+            任务节点显示的名称，如果流程定义和任务节点的主题属性都没有值，引擎就会将名称设置为主题。
+          </p> 
+          <p>
+            <span role="bold">任务类型</span>:
+            为了方便用户对任务进行归类，人工任务提供任务类型属性，默认是foxbpmtask
+          </p>
+          <p>
+            <span role="bold">操作表单</span>:
+            用来进行任务处理的表单地址,可以从数据变量中的表单变量中选择,也可以返回一段字符串地址"add.html"。支持脚本表达式。
+          </p>
+          <p>
+            <span role="bold">浏览表单</span>:
+            用来在查看已经处理完毕的任务的表单。支持脚本表达式。
+          </p>
+          <p>
+            <span role="bold">任务优先级</span>:
+            用来标识任务的紧急程度,以供用户选择执行，目前引擎支持五中任务级别分别是，非常低、低、一般、高、非常高，其常量值分别是20、40、50、80、100
+          </p>
+          <p>
+            <span role="bold">任务主题</span>:
+            每个任务都有自己的任务主题、如果人工任务上该属性值为空，引擎会自动从流程定义上获取默认的任务主题。
+            如果流程定义上的默认任务主题也没有值，引擎就将任务活动的名称设置为主题。支持脚本表达式。
+          </p>
+          <p>
+            <span role="bold">任务描述</span>:
+            每个任务都有自己任务描述，描述任务的详细信息。支持脚本表达式。
+          </p>
+          <p>
+            <span role="bold">完成后的描述</span>:
+            每个任务都有完成后的描述，描述该任务完成的详细信息。支持脚本表达式。
+          </p>
+          <p>
+            <span role="bold">任务预计持续时间</span>:
+            目前只做显示用，不做超时处理。
+          </p>
+          <p>  
+            <span role="bold">XML定义</span>:
+            <programlisting language="xml">
+              </programlisting> 
+          </p> 
+        </div>
+        
+        
+        <div id="bpmn.UserTask.skipStratetry">
+          <h3>跳过策略</h3>
+          <p>
+            跳过策略表明自动跳过该人工任务节点，流程进入该节点时也不会分配任务，自动跳过，流程继续往下运行。
+            用户可以选择是否生成跳过记录，如果选择生成跳过记录，引擎在跳过该任务时会生成一条已办任务。
+          </p>
+          <p>
+            <span role="bold">XML定义</span>:跳过策略、处理者、跳过意见都支持脚本表达式。
+            <programlisting language="xml">
+              </programlisting> 
+          </p>
+        </div>
+        
+        <div id="bpmn.UserTask.command">
+          <h3>任务命令</h3>
+          <p>
+            任务命令可以展现于业务表单界面，是用户同流程引擎交互的接口，用户可以基于eclipse设计器进行配置。
+            任务节点生成任务之后可以通过相关接口获取每个任务的所有命令，然后在通过相关API执行任务命令。
+          </p>
+          <p>
+            <span role="bold">XML定义</span>:
+            <programlisting language="xml">
+              </programlisting> 
+          </p>
+        </div>
+        
+        <div id="bpmn.UserTask.assignment">
+          <h3>任务分配</h3> 
+          <p>
+            人工任务需要指派给一个用户或者是一个组(部门、角色),任务类型也被分为两大种:独占、共享，
+            独占的任务直接指派给一个用户,共享的任务可以指定给多个用户、部门、角色等,共享任务默认需要先领取才能处理。
+          </p> 
+          <p> 
+            下面这段XML表示,制作标书这个任务的处理者是编号为"4sgkt-71ljug-i11jy5t9-1-i11k8xgj-1e"的角色，该角色下的所有用户都可以处理该任务。 
+            <programlisting language="xml"></programlisting>
+          </p>
+        </div>
+         
+        <div id="bpmn.UserTask.advancedProperties">
+          <h3>高级属性</h3> 
+          <p>
+            高级属性中的多实例,是用来完成一个for循环的动作,出发多次不同参数的执行,并将结果收集起来。BPMN官方对多实例是使用Multi-instance元素,来实现的,
+            一个多实例活动(multi-instance activity)是一种被定义为一个特定的步骤重复完成一些操作。
+            在编程的概念里,这个多实例相当于一个for循环,每次将输入数据集(loopDataInputCollection)中的集合遍历出来,
+            放置到输入项编号(inputDataItem)所指定的变量中,这样在这个活动(activity)中变可以使用这个输入项编号,
+            每次循环中,我们可以对输出项编号(outputDataItem)里边所指定的变量赋值,引擎会自动将这次循环中对输出项编号变量赋的值插入到输出数据集(loopDataOutputCollection)在每次循环完成的时候,
+            会触发完成表达式(completionCondition),用来判断是否够能离开这个节点。
+            
+          </p>
+          <p><span>注意</span>: 用于人工任务(UserTask)来说,多实例一般就是用来完成并行会签功能,也可以作用在子流程等其他节点上起到不同的效果。</p>
+          <p><span>注意</span>: 串行的多实例,在这个版本的FoxBPM中并没有实现,我们将会在今后的版本中引入这个功能。</p>
+          <p>
+            <ol>
+              <li>
+                <p><span role="bold">输入数据集(loopDataInputCollection)</span>: 
+                  
+                </p>
+              </li>
+              <li><p><span role="bold">输入项编号(inputDataItem)</span>: 
+                
+              </p></li>
+              <li><p><span role="bold">输出项编号(outputDataItem)</span>: 
+                
+              <li><p><span role="bold">输出数据集(loopDataOutputCollection)</span>: 
+                
+              </p></li>
+            </ol>
+          </p>
+          <p>
+            <span role="bold">XML定义</span>:
+            <programlisting language="xml">
+              </programlisting> 
+          </p>
+           
+        </div>
+        
+        <div id="bpmn.UserTask.connector">
+          <h3>任务连接器</h3>
+          <p>
+            目前FoxBPM流程引擎是通过连接器的方式的和外部系统交互的。比如邮件、WEB服务、短信接口等。
+            eclipse插件可以进行视图化的配置，可以控制连接器的触发机制，比如是在任务节点进入的时候执行、任务分配的时候执行、任务节点离开的时候执行、连接器的定时执行等。
+          </p>
+          <p>
+            <span role="bold">XML定义</span>:
+            <programlisting language="xml">
+              </programlisting> 
+          </p>
+        </div>
+      </div>
+      <div>
+        <h3>子流程</h3> 
+        <p>
+          bpmn 2.0区分了普通子流程， 也叫做内嵌子流程，和调用节点(外部子流程)，看起来很相似。 上概念上讲，当流程抵达节点时，两者都会调用子流程。 
+          不同点是调用节点引用流程定义外部的一个流程，子流程 会内嵌到原始的流程定义中。使用调用节点的主要场景是需要重用流程定义， 这个流程定义需要被很多其他流程定义调用的时候。 
+          当流程执行到调用节点，会创建一个新分支，它是到达调用节点的流程的分支。 这个分支会用来执行子流程，默认创建并行子流程，就像一个普通的流程。 上级流程会等待子流程完成，然后才会继续向下执行。 
+        </p>
+        <div>
+          <h3>公有子流程</h3> 
+          <p> 
+            使用调用节点的主要场景是需要重用流程定义， 这个流程定义需要被很多其他流程定义调用的时候。 
+            共有子流程是外部流程，主流程通过子流程编号和版本进行启动，同时可以传递业务关联键和映射主流程数据变量。 
+            当流程执行到调用节点，会创建一个新分支，它是到达调用节点的流程的分支。 这个分支会用来执行子流程，默认创建并行子流程，就像一个普通的流程。 上级流程会等待子流程完成，然后才会继续向下执行。 
+            共有子流程可以选择是否是异步调用，如果是选择为异步调用则创建子流程完毕后直接执行离开事件，子流程和主流程都独立运行。
+          </p>
+          <div ><div>
+            <img align="center"  src="../images/callActivity.PNG"/>
+          </div></div>
+        </div>
+        <div>
+          <h3>私有子流程</h3> 
+          <p>
+            私有子流程定义在父流程里，可以展开显示它所包含的模型细节，也可以收起隐藏细节。
+            私有子流程可以将一部分节点步骤作为一个整体，进行多实例，跳过策略，连接器的配置，并可以折叠隐藏关键业务步骤。
+            需要注意的是私有子流程属于主流程，所以主流程上配置的数据变量，对于私有子流程来说也是共享的。
+          </p>
+          <div ><div>
+            <img align="center"  src="../images/subProcess.PNG"/>
+          </div></div>
+        </div>
+      </div>
+      <div>
+        <h3>发送任务</h3> 
+        <div id="bpmn.SendTask.Description">
+          <h3>描述</h3>
+          <p>
+            发送任务(SendTask)用来发送邮件、短信、通知等等消息,FoxBPM使用连接器来完成这个节点的功能。
+            发送任务中一般使用发送邮件的连接器。
+          </p>
+        </div>
+        <div id="bpmn.SendTask.GraphicalNotation">
+          <h3>图形符号</h3>
+          <p> 
+            发送任务是图形为一个圆角矩形,有一个小的黑色邮件图标在左上角。
+            <div ><div>
+              <img align="center"  src="../images/sendTask.PNG"/>
+            </div></div>
+          </p>
+        </div> 
+        <div id="bpmn.SendTask.XMLRepresentation">
+          <h3>XML描述</h3> 
+          <p>
+            XML元素表示如下:
+            <programlisting language="xml"></programlisting>
+          </p>
+        </div>
+      </div>
+      <div>
+        <h3>脚本任务</h3> 
+        <div id="bpmn.ScriptTask.Description">
+          <h3>描述</h3>
+          <p>
+            脚本任务(ScriptTask)是一个自动的活动，不需要用户手动执行，当一个流程执行到脚本任务的时候相应的脚本被会被执行，而不是像人工任务那样进行分配任务。但是脚本任务属于活动节点所以支持跳过策略、多实例、执行连接器。
+            对应的脚本语言用户可以基于eclipse插件进行编写。 
+          </p>
+        </div>
+        <div id="bpmn.ScriptTask.GraphicalNotation">
+          <h3>图形符号</h3>
+          <p> 
+            脚本任务是图形为一个圆角矩形,有一个小的脚本图标在左上角。
+            <div ><div>
+              <img align="center" src="../images/script_task.PNG"/>
+            </div></div>
+          </p>
+        </div>
+        
+        
+        <div id="bpmn.ScriptTask.XMLRepresentation">
+          <h3>XML描述</h3> 
+          <p>
+            XML元素表示如下:
+            <programlisting language="xml"></programlisting>
+          </p>
+          <p>
+            FoxBPM暂时支持只Groovy，开发人员也可以扩展自己的脚本语言,这里我们推荐使用Groovy做为默认的脚本引擎,关于Groovy请查看<a href="http://groovy.codehaus.org">Groovy官网</a>
+          </p> 
+          
+        </div>
+        
+      </div>
+      <div>
+        <h3>规则任务</h3> 
+        <div id="bpmn.BusinessRuleTask.Description">
+          <h3>描述</h3>
+          <p>
+            业务规则任务(BusinessRuleTask)用来执行一段业务规则脚本,这个节点FoxBPM引擎是采用连接器的方式去执行的。
+          </p>
+        </div>
+        <div id="bpmn.BusinessRuleTask.GraphicalNotation">
+          <h3>图形符号</h3>
+          <p> 
+            服务任务是图形为一个圆角矩形,有一个小的表格图标在左上角。
+            <div ><div>
+              <img align="center"  src="../images/businessrule_task.PNG"/>
+            </div></div>
+          </p>
+        </div>
+        
+        
+        <div id="bpmn.BusinessRuleTask.XMLRepresentation">
+          <h3>XML描述</h3> 
+          <p>
+            XML元素表示如下:
+            <programlisting language="xml"></programlisting>
+          </p>
+        </div>
+      </div>
+      <div>
+        <h3>接收任务</h3> 
+        <p></p>
+        <div id="bpmn.ReceiveTask.Description">
+          <h3>描述</h3>
+          <p>
+            接收任务(ReceiveTask)当流程走到这个节点的时候,令牌(Token)会暂停在这个节点等待一个命令来激活它。
+            一般这个节点,运用在流程走到某个步骤之后停止,等待别人事情完成之后,接到通知,再继续进行下去的功能。
+          </p>
+        </div>
+        <div id="bpmn.ReceiveTask.GraphicalNotation">
+          <h3>图形符号</h3>
+          <p> 
+            发送任务是图形为一个圆角矩形,有一个小的白色邮件图标在左上角。
+            <div ><div>
+              <img align="center"  src="../images/ReceiveTask.PNG"/>
+            </div></div>
+          </p>
+        </div>
+        
+        
+        <div id="bpmn.ReceiveTask.XMLRepresentation">
+          <h3>XML描述</h3>
+          
+          <p>
+            XML元素表示如下:
+            <programlisting language="xml"></programlisting>
+          </p>
+        </div>
+      </div>
+       
+      <div>
+        <h3>服务任务</h3> 
+        <div id="bpmn.ServiceTask.Description">
+          <h3>描述</h3>
+          <p>
+            BPMN官方定义,服务任务(ServiceTask)专门被用来调用服务用的,FoxBPM将这里指的服务解释为连接器,服务任务可以通过连接器完成调用功能，也可以用来和SOA框架集成。
+            服务可以Web服务、也可以是自动化的应用程序
+          </p>
+        </div>
+        <div id="bpmn.ServiceTask.GraphicalNotation">
+          <h3>图形符号</h3>
+          <p> 
+            服务任务是图形为一个圆角矩形,有一个小的齿轮图标在左上角。
+            <div ><div>
+              <img align="center"  src="../images/service_task.PNG"/>
+            </div></div>
+          </p>
+        </div>
+        
+        
+        <div id="bpmn.ServiceTask.XMLRepresentation">
+          <h3>XML描述</h3> 
+          <p>
+            XML元素表示如下:
+            <programlisting language="xml"></programlisting>
+          </p>
+        </div>
+      </div>
+      <div>
+        <h3>手工任务</h3> 
+        <div id="bpmn.ManualTask.Description">
+          <h3>描述</h3>
+          <p>
+            手工任务(ManualTask)这个节点,用于描述线下完成的工作,在FoxBPM引擎遇到这个节点会直接忽略过去,这个节点只具有图形的含义。
+          </p>
+        </div>
+        <div id="bpmn.ManualTask.GraphicalNotation">
+          <h3>图形符号</h3>
+          <p> 
+            发送任务是图形为一个圆角矩形,有一个手的图标在左上角。
+            <div ><div>
+              <img align="center"  src="../images/manualTask.PNG"/>
+            </div></div>
+          </p>
+        </div>
+        
+        
+        <div id="bpmn.ManualTask.XMLRepresentation">
+          <h3>XML描述</h3> 
+          <p>
+            XML元素表示如下:
+            <programlisting language="xml"></programlisting>
+          </p>
+        </div>
+      </div> 
+    </div>
+      
+    <div>
+      <h3>网关</h3>
+      <p>
+        　　网关是用来控制流程分支执行的(令牌的分支执行)。网关能够合并或分散令牌。网关是图形为一个菱形,内部为一个图标。这个图标显示了网关的类型。
+      </p>
+      <div>
+        <h3>包容网关</h3> 
+        <div id="bpmn.InclusiveGateway.Description">
+          <h3>描述</h3>
+          <p>
+            包容网关(InclusiveGateway)更像是排他网关和并行网关的结合,它会验证后面的每条顺序流,如果后面有多条顺序流条件都满足则产生并发,如只有一个
+            满足,则令牌正常往下流转不产生分支,如没有一条顺序流满足则抛出异常。
+          </p>
+        </div>
+        
+        <div id="bpmn.InclusiveGateway.GraphicalNotation">
+          <h3>图形符号</h3>
+          <p> 
+            包容网关(ExclusiveGateway)图形为一个菱形里边有一个"o"圆圈。
+            <div ><div>
+              <img align="center"   src="../images/inclusive_gateway.PNG"/>
+            </div></div>
+          </p>
+        </div>
+        
+        <div id="bpmn.InclusiveGateway.XMLRepresentation">
+          <h3>XML描述</h3>
+          
+          <p>
+            XML元素表示如下:
+            <programlisting language="xml"></programlisting>
+          </p>
+          
+          <p>
+            下面是一个使用包容网关和平行网关例子的XML表示:
+            <programlisting language="xml"></programlisting>
+          </p>
+          <p>
+            上面的例子使用包容网关和并行网关来完成操作,当包容网关后面有多个分支的时候,并行网关负责合并,如果包容网关后面没有产生并发的话,那么并行网关将忽略不记。
+          </p>
+          
+          <p>
+            <span>注意: </span> 所有非网关的FlowNode节点,后面都默认实现了包容网关的功能,FoxBPM允许开发人员不使用网关来控制顺序流走向,但这样做是不推荐的,除非万不得已。
+          </p>
+          <p>
+            下面这样做法FoxBPM引擎是支持的,但是不推荐这么用。
+            <div ><div>
+              <img align="center"  src="../images/connect_condition.PNG"/>
+            </div></div>
+          </p>
+          
+        </div>
+      </div>
+      <div>
+        <h3>排他网关</h3> 
+        <div id="bpmn.ExclusiveGateway.Description">
+          <h3>描述</h3>
+          <p>
+            排他网关(ExclusiveGateway)在分裂时，只会选择一个输出顺序流传递Token,会按照后面线条的排序号优先计算,第一个满足条件的会将Token传递过去,排他网关在聚合时，任何一个输入顺序流传入Token，网关都会向后传递，不会对Token进行同步。我们使用"x"在网关内部标示出这是一个排他网关，默认情况下，我们也可以忽略标示。
+          </p>
+          <p>
+            一般情况下,只允许后面有一条线通过或者说是只允许有一个条件满足的时候使用排他网关。
+          </p>
+          <p>
+            <span>注意: </span> 当排他网关(ExclusiveGateway)后面的线条都不满足的时候会抛出异常.
+          </p>
+        </div>
+        
+        <div id="bpmn.ExclusiveGateway.GraphicalNotation">
+          <h3>图形符号</h3>
+          <p> 
+            排他网关(ExclusiveGateway)图形为一个菱形里边有一个X。注意,一个网关如果内部是空的则默认为排他网关。
+            <div ><div>
+              <img align="center"  src="../images/ExclusiveGateway.PNG"/>
+            </div></div>
+          </p>
+        </div>
+        
+        <div id="bpmn.ExclusiveGateway.XMLRepresentation">
+          <h3>XML描述</h3>
+          <p>下面描述的是一个排他网关,后面通过带条件的顺序流<a linkend="bpmn.SequenceFlow.Description">(Conditional SequenceFlow)</a>连接了三个Task。</p>
+          <div ><div>
+            <img align="center"  src="../images/bpmn.ExclusiveGateway.XMLRepresentation.1.png"/>
+          </div></div>
+          
+          <p> XML元素表示如下: <programlisting language="xml"></programlisting>
+          </p>
+        </div>
+      </div>
+      <div>
+        <h3>并行网关</h3> 
+        <div id="bpmn.ParallelGateway.Description">
+          <h3>描述</h3>
+          <p>
+            并行网关(ParallelGateway)用于将流程产生多个并行的分支,也可以将多个并行的分支合并回一个主线。
+            <ol>
+              <li>
+                <p>
+                  <span role="bold">分散</span>(Diverging):  
+                  当并行网关处于分散(Diverging)状态的时候,流程令牌(token)经过的时候,会被分散出和网关输出顺序流相同数据量的分支,并每个分支沿着对应的顺序流向下执行。
+                </p>
+              </li>
+              <li>
+                <p>
+                  <span role="bold">合并</span>(Converging): 
+                  当并行网关处于合并(Converging)状态的时候,当分支令牌经过的时候,分支令牌会停留在网关上,等待其他的分支一起走到该网关,然后合并为一个继续向下。
+                </p>
+              </li>
+            </ol>
+          </p>
+          <p>
+            分散、合并原理解释: 令牌 token1 走到 ParallelGateway1(Diverging) 的时候,token1会生成两个子令牌 token1.1 和 token1.2,两个子令牌沿着顺序流向下面的节点运行,token1父令牌
+            停留在ParallelGateway1上面,当token1.1到达 ParallelGateway2(Converging) 的时候,会停在上面等待 它的"兄弟" token1.2,当token1.2到达ParallelGateway2(Converging)的时候,
+            两个子令牌都被结束,同时激活父令牌token1,将token1拉到ParallelGateway2,沿着后面的线条向下运行。
+          </p>
+          <p>
+            <span>注意: </span> 并行网关处于分散的时候,会忽略掉后面顺序流的条件,直接向下执行,这是并行网关和包容网关最大的区别。
+          </p>
+        </div>
+        
+        <div id="bpmn.ParallelGateway.GraphicalNotation">
+          <h3>图形符号</h3>
+          <p> 
+            并行网关(ParallelGateway)图形为一个菱形里边有一个"+"。
+            <div ><div>
+              <img align="center"  src="../images/ParallelGateway.PNG"/>
+            </div></div>
+          </p>
+        </div>
+        
+        <div id="bpmn.ParallelGateway.XMLRepresentation">
+          <h3>XML描述</h3>
+          <p>
+            XML元素表示如下:
+            <programlisting language="xml"></programlisting>
+          </p>
+          <p>
+            下面是一个合并、分散例子的XML表示:
+            <programlisting language="xml">
+          </programlisting>
+          </p>
+           
+          <p>
+            FoxBPM的分支和合并要遵循同时分散,同时收回的原则,一次分散出来的子令牌必须在一个合并网关上合并。例如下面的例子：
+          </p> 
+          <p>
+            <div ><div>
+              <img align="center"  src="../images/bpmn.ParallelGateway.GraphicalNotation.1.png"/>
+            </div></div>
+          </p> 
+          <p>
+            <div ><div>
+              <img align="center"  src="../images/bpmn.ParallelGateway.GraphicalNotation.2.png"/>
+            </div></div>
+          </p> 
+        </div>
+      </div>
+    </div>
+    <div>
+      <h3>线条</h3>
+      <div>
+        <h3>顺序流</h3> 
+        <div id="bpmn.SequenceFlow.Description">
+          <h3>描述</h3>
+          <p>
+            顺序流是流程中两个元素之间的连接，令牌通过顺序流流转到下面的节点上。
+            一个顺序流(SequenceFlow)上可以定义条件,当条件返回为true则允许通过,返回false则不允许通过。当节点后面多条线都满足条件将产生一个并发(有几条线满足则产生几个并发)。    
+            顺序流的排序号,当一个节点后面有多个顺序流的时候,会按照顺序流的排序号进行验证,越小的越先参与计算。         
+          </p>
+        </div>
+        
+        <div id="bpmn.SequenceFlow.GraphicalNotation">
+          <h3>图形符号</h3>
+          <p> 
+            一个顺序流可视化作为一个从源元素对目标元素的箭头。箭头始终指向朝着既定目标。 
+            <div ><div>
+              <img align="center"  src="../images/sequence_flow.PNG"/>
+            </div></div>
+          </p>
+        </div>
+        
+        <div id="bpmn.SequenceFlow.XMLRepresentation">
+          <h3>XML描述</h3>
+          <p>
+            顺序流元素节点没有子元素，主要有两个属性也是关联任务活动节点、以及流程运行所需的重要的两个属性：sourceRef表示这个流从哪里来、targetRef表示这个流要到哪里去。 
+            <programlisting language="xml"></programlisting>
+          </p>
+        </div>
+      </div>
+      <div>
+        <h3>关联线</h3> 
+        <p>
+          关联线有两种普通关联线和数据关联线，普通关联线用于连接注释和活动节点，即为活动节点提供注释功能；数据关联线用于连接活动节点和数据输入图形数据输出图形。
+          起装饰的作用，对流程的运行没有任务影响。
+        </p>
+      </div>
+    </div>
+    <div>
+      <h3>图形元素</h3>
+      <p>图形元素对流程而言起到装饰的作用，用来做交互式流程和布局用，不参与也不影响流程的运转。FoxBPM目前不支持交互式流程图（会在后面版本支持），所以目前Lane只是作为布局工具使用。后续版本中，泳道会参与任务的分配。</p>
+      <div>
+        <h3>数据对象</h3> 
+        <p>用于描述任务活动的数据对象</p>
+      </div>
+      <div>
+        <h3>组</h3> 
+        <p>用于将流程元素进行简单的分组</p>
+      </div>
+      <div>
+        <h3>数据输入</h3> 
+        <p>用于注释活动节点的输入数据</p>
+      </div>
+      <div>
+        <h3>数据输出</h3> 
+        <p>用于注释活动节点的输出数据</p>
+      </div>
+      <div>
+        <h3>注释</h3> 
+        <p>主要用于流程节点元素的注释，可注释的元素包括除线条之外的大部分元素如事件、网关、活动、泳道、数据对象等等。</p>
+      </div>
+      <div>
+        <h3>泳道</h3> 
+        <p>属于流程元素分组的一种，可以将流程按照角色部门业务对象等进行分组，泳道可以更加清晰地展示各组之间的关系</p>
+      </div>
+    </div>
+   </div>
+  
+</body>
